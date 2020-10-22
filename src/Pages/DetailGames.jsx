@@ -1,7 +1,9 @@
 import React, {useContext} from 'react'
-import {LaptopOutlined} from '@ant-design/icons';
+import {Link} from "react-router-dom";
+import {Button} from 'antd';
+import {LaptopOutlined, ArrowLeftOutlined} from '@ant-design/icons';
 import {useParams} from "react-router-dom";
-import {GamesContext} from '../Context/GamesContext'
+import {GamesContext} from '../Context/Context'
 import './Style.css'
 
 const DetailGames = () => {
@@ -13,7 +15,10 @@ const DetailGames = () => {
     return(
         <div className="container">
             <div className="detail-container" key={item[0].id}>
-            <div><img className="detail-picture" src={item[0].image} alt=""/></div>
+            <div>
+            <Link to='/'><Button style={{float: "left", margin: "10px 0 15px 15px"}} type="primary"><ArrowLeftOutlined/></Button></Link>
+            <img className="detail-picture" src={item[0].image} alt=""/>
+            </div>
             <div className="detail">
             <h2 className="detail-tittle">{item[0].title}</h2>
             <br/>
