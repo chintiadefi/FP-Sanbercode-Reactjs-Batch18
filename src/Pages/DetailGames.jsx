@@ -1,6 +1,6 @@
 import React, {useContext} from 'react'
 import {Link} from "react-router-dom";
-import {Button} from 'antd';
+import {Button, Tag} from 'antd';
 import {LaptopOutlined, ArrowLeftOutlined} from '@ant-design/icons';
 import {useParams} from "react-router-dom";
 import {GamesContext} from '../Context/Context'
@@ -23,8 +23,8 @@ const DetailGames = () => {
             <h2 className="detail-tittle">{item[0].title}</h2>
             <br/>
             <p>Genre : {item[0].genre}</p>
-            <p>Single Player : {item[0].singlePlayer}</p>
-            <p>Multi Player : {item[0].multiPlayer}</p>
+            <p>Single Player : {(item[0].singlePlayer) === 0 ? <Tag color="red">No</Tag> : <Tag color="blue">Yes</Tag>}</p>
+            <p>Multi Player : {(item[0].multiPlayer) === 0 ? <Tag color="red">No</Tag> : <Tag color="blue">Yes</Tag>}</p>
             <p>Release : {item[0].year}</p>
             <br/>
             <p><LaptopOutlined/>&nbsp;Platform :</p>

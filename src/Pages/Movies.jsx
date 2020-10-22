@@ -1,16 +1,8 @@
 import React, {useContext} from 'react'
-import {StarTwoTone} from '@ant-design/icons';
+import {Rate} from 'antd';
 import {Link} from "react-router-dom";
 import {MoviesContext} from '../Context/Context'
 import './Style.css'
-
-function ratings(amount) {
-    for (var star = 1; star < amount; star++) {
-        return(
-            <StarTwoTone/>
-        ); 
-    }
-}
 
 const Movies = () => {
     const [movies] = useContext(MoviesContext)
@@ -31,7 +23,7 @@ const Movies = () => {
         <p className="detail-1">{item.genre}</p>
         <p className="detail-2">{item.year}</p>
         </div>
-        <p className="detail-1">{ratings(item.rating)}</p>
+        <Rate allowHalf disabled defaultValue={item.rating / 2}/>
         </div>
         </Link>
          )})}

@@ -1,6 +1,6 @@
 import React, {useContext} from 'react'
 import {Link} from "react-router-dom";
-import {Button} from 'antd';
+import {Button, Rate} from 'antd';
 import {WechatOutlined, FileUnknownOutlined, ArrowLeftOutlined} from '@ant-design/icons';
 import {useParams} from "react-router-dom";
 import {MoviesContext} from '../Context/Context'
@@ -31,7 +31,7 @@ const DetailGames = () => {
             <h2 className="detail-tittle">{item[0].title}</h2>
             <br/>
             <p>Genre : {item[0].genre}</p>
-            <p>Rating : {item[0].rating}</p>
+            <p>Rating : <Rate allowHalf disabled defaultValue={item[0].rating / 2}/></p>
             <p>Duration : {minuteToHours(item[0].duration)}</p>
             <p>Year : {item[0].year}</p>
             <br/>
