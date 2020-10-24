@@ -8,7 +8,12 @@ const {Header} = Layout;
 
 function Headers() {
 
-  const [user] = useContext(UserContext);
+  const [user, setUser] = useContext(UserContext);
+
+  const handleLogout = () =>{
+    setUser(null)
+    localStorage.removeItem("user")
+  }
 
     return(
         <Layout>
@@ -22,6 +27,8 @@ function Headers() {
               <>
               <Menu.Item style={{marginLeft: '20px'}} key="3"><Link to='/listgames'>List Games</Link></Menu.Item>
               <Menu.Item key="4"><Link to='/listmovies'>List Movies</Link></Menu.Item>
+              <Button onClick={handleLogout} style={{float: "right", margin: "15px 10px 15px 0"}} type="primary">Logout</Button>
+              <Button style={{float: "right", margin: "15px 10px 15px 0"}} type="link">Welcome! {(user.name).split(" ", 1)}</Button>
               </>
             )
           }
@@ -29,7 +36,7 @@ function Headers() {
             (
               <>
           <Button style={{float: "right", margin: "15px 10px 15px 0"}} type="primary"><Link to='/register'>Register</Link></Button>
-          <Button style={{float: "right", margin: "15px 10px 15px 0"}} type="primary">Login</Button>
+          <Button style={{float: "right", margin: "15px 10px 15px 0"}} type="primary"><Link to='/login'>Login</Link></Button>
               </>
             )
           }

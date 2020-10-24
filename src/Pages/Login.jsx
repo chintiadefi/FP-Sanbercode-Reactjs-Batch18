@@ -1,16 +1,28 @@
 import React, {useContext, useState} from "react"
-import {UserContext} from '../'
+import {UserContext} from '../Context/Context'
+import {Form, Input, Button, Layout} from 'antd';
 import axios from "axios"
 
-const Login = () =>{
-  const [, setUser] = useContext(UserContext)
-  const [input, setInput] = useState({email: "" , password: ""})
+const layout = {
+  labelCol: { span: 8 },
+  wrapperCol: { span: 8 },
+};
 
-  const handleSubmit = (event) =>{
-    event.preventDefault()
+const validateMessages = {
+  required: '${label} is required!',
+  types: {
+    number: '${label} is not a validate number!',
+    email: 'The input is not valid E-mail!'
+  }
+};
+
+const Login = () =>{
+  const [user, setUser] = useContext(UserContext)
+
+  const handleSubmit = values =>{
     axios.post("https://backendexample.sanbersy.com/api/user-login", {
-      email: input.email, 
-      password: input.password
+      email: values.email, 
+      password: values.password
     }).then(
       (res)=>{
         var user = res.data.user
@@ -24,36 +36,22 @@ const Login = () =>{
     })
   }
 
-  const handleChange = (event) =>{
-    let value = event.target.value
-    let name = event.target.name
-    switch (name){
-      case "email":{
-        setInput({...input, email: value})
-        break;
-      }
-      case "password":{
-        setInput({...input, password: value})
-        break;
-      }
-      default:{break;}
-    }
-  }
-
   return(
-    <>
-      <div style={{margin: "0 auto", width: "25%", padding: "50px"}}>
-        <form onSubmit={handleSubmit}>
-          <label>Email: </label>
-          <input type="email" name="email" onChange={handleChange} value={input.email}/>
-          <br/>
-          <label>Password: </label>
-          <input type="password" name="password" onChange={handleChange} value={input.password}/>
-          <br/>
-          <button>Login</button>
-        </form>
-      </div>
-    </>
+    <Layout>
+      <Form {...layout} style={{margin: '25px 0 100px 0'}} validateMessages={validateMessages} onFinish={handleSubmit}>
+      <Form.Item name={'email'} label="Email" rules={[{required: true}, {type: 'email'}]}>
+        <Input/>
+      </Form.Item>
+      <Form.Item name={'password'} label="Password" rules={[{required: true}]}>
+        <Input.Password/>
+      </Form.Item>
+      <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
+        <Button type="primary" htmlType="submit">
+          Login
+        </Button>
+      </Form.Item>
+    </Form>
+    </Layout>
   )
 }
 

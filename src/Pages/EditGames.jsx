@@ -22,33 +22,15 @@ const validateMessages = {
   },
 };
 
-const AddGames = () => {
+const EditGames = () => {
   const [games, setGames] = useContext(GamesContext)
   const [user] = useContext(UserContext)
-
-  const handleSubmit = values => {
-    axios.post("https://backendexample.sanbersy.com/api/data-game", {
-      name: values.title, 
-      genre: values.genre, 
-      singlePlayer: values.singlePlayer,
-      multiPlayer: values.multiPlayer,
-      release: values.year,
-      platform: values.platform,
-      image_url: values.image},
-      {headers: {"Authorization" : `Bearer ${user.token}`}})
-      .then(done => {
-        alert("Succesfull")
-      })
-      .catch((err)=>{
-      alert(err)
-    })
-  }
 
   return (
     <Layout>
        <Link to='/listgames'><Button style={{margin: "10px 0 15px 25%"}} type="primary"><ArrowLeftOutlined/></Button></Link>
         <h1 className="title-container" style={{textAlign: "center"}}>List Games</h1>
-    <Form {...layout} style={{margin: '25px 0 100px 0'}} validateMessages={validateMessages} onFinish={handleSubmit}>
+    <Form {...layout} style={{margin: '25px 0 100px 0'}} validateMessages={validateMessages}>
       <Form.Item name={'title'} label="Title" rules={[{ required: true }]}>
         <Input/>
       </Form.Item>
@@ -78,7 +60,7 @@ const AddGames = () => {
       </Form.Item>
       <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
         <Button type="primary" htmlType="submit, resetFields">
-          Add New Games
+          Save Edit
         </Button>
       </Form.Item>
     </Form>
@@ -86,4 +68,4 @@ const AddGames = () => {
   );
 };
 
-export default AddGames
+export default EditGames

@@ -6,7 +6,9 @@ export const MoviesContext = createContext();
 export const UserContext = createContext();
 
 export const GamesProvider = props => {
-    const [games, setGames] =  useState(null) 
+  const currentGames = JSON.parse(localStorage.getItem("id"))
+  const iniateGames = currentGames ? currentGames : null
+  const [games, setGames] =  useState(iniateGames)
 
     useEffect( () => {
         if (games === null){

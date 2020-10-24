@@ -10,16 +10,11 @@ import DetailMovies from './Pages/DetailMovies'
 import ListGames from './Pages/ListGames'
 import AddGames from './Pages/AddGames'
 import Register from './Pages/Register'
+import Login from './Pages/Login'
 import 'antd/dist/antd.css'
 
 function Routes() {
-  const [user, setUser] = useContext(UserContext);
-
-  const handleLogout = () =>{
-    setUser(null)
-    localStorage.removeItem("user")
-  }
-
+  const [user] = useContext(UserContext);
 
   const PrivateRoute = ({user, ...props }) => {
     if (user) {
@@ -48,11 +43,14 @@ function Routes() {
     <Route exact path='/detailmovies/:id'>
     <MoviesProvider><DetailMovies/></MoviesProvider>
     </Route>
-    <Route exact path='/listgames'>
+    <PrivateRoute exact path='/listgames' user={user}>
     <GamesProvider><ListGames/></GamesProvider>
-    </Route>
-    <Route path='/addgames' exact component={AddGames}/>
+    </PrivateRoute>
+    <PrivateRoute exact path='/addgames' user={user}>
+    <GamesProvider><AddGames/></GamesProvider>
+    </PrivateRoute>
     <LoginRoute exact path='/register' user={user} component={Register}/>
+    <LoginRoute exact path='/login' user={user} component={Login}/>
   </Switch>
   <Footer/>
   </BrowserRouter>

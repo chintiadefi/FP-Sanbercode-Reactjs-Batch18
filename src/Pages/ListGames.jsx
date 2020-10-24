@@ -1,12 +1,23 @@
 import React, {useContext} from 'react'
-import {GamesContext} from '../Context/Context'
+import axios from 'axios';
+import {GamesContext, UserContext} from '../Context/Context'
 import {Link} from "react-router-dom";
 import {Table, Space, Button} from 'antd';
 import {PlusCircleTwoTone} from '@ant-design/icons';
 import './Style.css'
 
 const ListGames = () => {
-    const [games] = useContext(GamesContext)
+    const [games, setGames] = useContext(GamesContext)
+    const [user] = useContext(UserContext)
+
+    const handleDelete = event =>{
+      var action = parseInt(event.target.value)
+        axios.delete(`https://backendexample.sanbersy.com/api/data-game/${action}`, {headers: {"Authorization" : `Bearer ${user.token}`}} )
+        .then(res => {
+          var newGames = games.filter(id=> id.id !== action)
+          setGames(newGames)
+        })
+    }
 
 const columns = [
     {
@@ -51,11 +62,11 @@ const columns = [
       },
       {
         title: 'Action',
-        key: 'action',
-        render: () => (
+        key: 'id',
+        render: (a) => (
           <Space size="middle">
-            <a>Edit</a>
-            <a>Delete</a>
+            <button>Edit</button>
+            <button value={a.id} onClick={handleDelete}>Delete</button>
           </Space>
         )
       },
