@@ -1,23 +1,42 @@
-import React from 'react';
-import {BrowserRouter, Switch, Route} from "react-router-dom";
-import Headers from './Component/Header'
-import Footers from './Component/Footer'
+import React, {useContext} from 'react';
+import {BrowserRouter, Switch, Route, Redirect} from "react-router-dom";
+import {UserProvider, UserContext, GamesProvider, MoviesProvider} from './Context/Context'
+import Header from './Component/Header'
+import Footer from './Component/Footer'
 import Games from './Pages/Games'
 import Movies from './Pages/Movies'
 import DetailGames from './Pages/DetailGames'
 import DetailMovies from './Pages/DetailMovies'
 import ListGames from './Pages/ListGames'
 import AddGames from './Pages/AddGames'
-import {GamesProvider, MoviesProvider} from './Context/Context'
+import Register from './Pages/Register'
 import 'antd/dist/antd.css'
 
-function App() {
-  return (
-    <BrowserRouter>
-    <Headers/>
+function Routes() {
+  const [user, setUser] = useContext(UserContext);
 
-    <Switch>
-    <Route exact path='/'>
+  const handleLogout = () =>{
+    setUser(null)
+    localStorage.removeItem("user")
+  }
+
+
+  const PrivateRoute = ({user, ...props }) => {
+    if (user) {
+      return <Route {...props} />;
+    } else {
+      return <Redirect to="/login" />;
+    }
+  };
+
+  const LoginRoute = ({user, ...props }) =>
+  user ? <Redirect to="/" /> : <Route {...props} />;
+
+  return(
+  <BrowserRouter>
+  <Header/>
+  <Switch>
+  <Route exact path='/'>
     <GamesProvider><Games/></GamesProvider>
     </Route>
     <Route exact path='/detailgames/:id'>
@@ -33,10 +52,18 @@ function App() {
     <GamesProvider><ListGames/></GamesProvider>
     </Route>
     <Route path='/addgames' exact component={AddGames}/>
-    </Switch>
+    <LoginRoute exact path='/register' user={user} component={Register}/>
+  </Switch>
+  <Footer/>
+  </BrowserRouter>
+  );
+}
 
-    <Footers/>
-    </BrowserRouter>
+function App() {
+  return(
+    <UserProvider>
+    <Routes/>
+    </UserProvider>
   );
 }
 

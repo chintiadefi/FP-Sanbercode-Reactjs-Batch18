@@ -3,6 +3,7 @@ import axios from 'axios'
 
 export const GamesContext = createContext();
 export const MoviesContext = createContext();
+export const UserContext = createContext();
 
 export const GamesProvider = props => {
     const [games, setGames] =  useState(null) 
@@ -62,3 +63,15 @@ export const MoviesProvider = props => {
         </MoviesContext.Provider>
     );
 }
+
+export const UserProvider = props => {
+  const currentUser = JSON.parse(localStorage.getItem("user"))
+  const iniateUser = currentUser ? currentUser : null
+  const [user, setUser] = useState(iniateUser);
+
+  return (
+    <UserContext.Provider value={[user, setUser]}>
+      {props.children}
+    </UserContext.Provider>
+  );
+};
