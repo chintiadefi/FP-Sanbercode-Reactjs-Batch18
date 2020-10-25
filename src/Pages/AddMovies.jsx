@@ -1,6 +1,6 @@
 import React, {useContext, useState} from 'react'
 import axios from 'axios'
-import {GamesContext, UserContext} from '../Context/Context'
+import {MoviesContext, UserContext} from '../Context/Context'
 import {Link} from "react-router-dom";
 import {Form, Input, InputNumber, Button, Radio, Layout} from 'antd';
 import {ArrowLeftOutlined} from '@ant-design/icons';
@@ -24,17 +24,18 @@ const validateMessages = {
 
 
 const AddGames = () => {
-  const [games, setGames] = useContext(GamesContext)
+  const [movies, setMovies] = useContext(MoviesContext)
   const [user] = useContext(UserContext)
 
   const handleSubmit = values => {
-    axios.post("https://backendexample.sanbersy.com/api/data-game", {
-      name: values.title, 
+    axios.post("https://backendexample.sanbersy.com/api/data-movie", {
+      title: values.title, 
       genre: values.genre, 
-      singlePlayer: values.singlePlayer,
-      multiPlayer: values.multiPlayer,
-      release: values.year,
-      platform: values.platform,
+      duration: values.duration,
+      rating: values.rating,
+      year: values.year,
+      description: values.description,
+      review: values.review,
       image_url: values.image},
       {headers: {"Authorization" : `Bearer ${user.token}`}})
       .then(done => {
@@ -48,7 +49,7 @@ const AddGames = () => {
   return (
     <Layout>
        <Link to='/listgames'><Button style={{margin: "10px 0 15px 25%"}} type="primary"><ArrowLeftOutlined/></Button></Link>
-        <h1 className="title-container" style={{textAlign: "center"}}>List Games</h1>
+        <h1 className="title-container" style={{textAlign: "center"}}>List Movies</h1>
     <Form {...layout} style={{margin: '25px 0 100px 0'}} validateMessages={validateMessages} onFinish={handleSubmit}>
       <Form.Item name={'title'} label="Title" rules={[{ required: true }]}>
         <Input/>
@@ -56,22 +57,19 @@ const AddGames = () => {
       <Form.Item name={'genre'} label="Genre" rules={[{ required: true }]}>
         <Input/>
       </Form.Item>
-      <Form.Item name="singlePlayer" label="Single Player" rules={[{ required: true }]}>
-        <Radio.Group>
-          <Radio value="1">Yes</Radio>
-          <Radio value="0">No</Radio>
-        </Radio.Group>
+      <Form.Item name={'duration'} label="Duration (minutes)" rules={[{ type: 'number', min: 0, required: true }]}>
+        <InputNumber/>
       </Form.Item>
-      <Form.Item name="multiPlayer" label="Multi Player" rules={[{ required: true }]}>
-        <Radio.Group>
-          <Radio value="1">Yes</Radio>
-          <Radio value="0">No</Radio>
-        </Radio.Group>
+      <Form.Item name={'rating'} label="Rating" rules={[{ type: 'number', min: 0, max: 10}]}>
+        <InputNumber/>
       </Form.Item>
       <Form.Item name={'year'} label="Released" rules={[{ type: 'number', min: 2000, max: 2020, required: true }]}>
         <InputNumber/>
       </Form.Item>
-      <Form.Item name={'platform'} label="Platform">
+      <Form.Item name={'description'} label="Description">
+        <Input.TextArea />
+      </Form.Item>
+      <Form.Item name={'review'} label="Review">
         <Input.TextArea />
       </Form.Item>
       <Form.Item name={'image'} label="Image URL" rules={[{ required: true }]}>
