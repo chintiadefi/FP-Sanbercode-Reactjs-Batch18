@@ -31,8 +31,8 @@ const AddGames = () => {
     axios.post("https://backendexample.sanbersy.com/api/data-game", {
       name: values.title, 
       genre: values.genre, 
-      singlePlayer: values.singlePlayer,
-      multiPlayer: values.multiPlayer,
+      singlePlayer: values.singlePlayer == "1" ? true : false,
+      multiplayer: values.multiplayer == "1" ? true : false,
       release: values.year,
       platform: values.platform,
       image_url: values.image},
@@ -49,7 +49,16 @@ const AddGames = () => {
     <Layout>
        <Link to='/listgames'><Button style={{margin: "10px 0 15px 25%"}} type="primary"><ArrowLeftOutlined/></Button></Link>
         <h1 className="title-container" style={{textAlign: "center"}}>List Games</h1>
-    <Form {...layout} style={{margin: '25px 0 100px 0'}} validateMessages={validateMessages} onFinish={handleSubmit}>
+    <Form {...layout}
+    style={{margin: '25px 0 100px 0'}}
+    validateMessages={validateMessages}
+    onFinish={handleSubmit}
+    initialValues={{
+      ['year']: 2020,
+      ['singlePlayer']: "1",
+      ['multiplayer']: "1"
+    }}
+      >
       <Form.Item name={'title'} label="Title" rules={[{ required: true }]}>
         <Input/>
       </Form.Item>
@@ -62,7 +71,7 @@ const AddGames = () => {
           <Radio value="0">No</Radio>
         </Radio.Group>
       </Form.Item>
-      <Form.Item name="multiPlayer" label="Multi Player" rules={[{ required: true }]}>
+      <Form.Item name="multiplayer" label="Multi Player" rules={[{ required: true }]}>
         <Radio.Group>
           <Radio value="1">Yes</Radio>
           <Radio value="0">No</Radio>

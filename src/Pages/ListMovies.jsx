@@ -15,7 +15,7 @@ const ListMovies = () => {
         axios.delete(`https://backendexample.sanbersy.com/api/data-movie/${action}`, {headers: {"Authorization" : `Bearer ${user.token}`}} )
         .then(res => {
           var newMovies = movies.filter(id=> id.id !== action)
-          setGames(newMovies)
+          setMovies(newMovies)
         })
     }
 
@@ -88,7 +88,7 @@ const columns = [
         <div className="container">
             <h1 className="title-container">List Movies</h1>
             <Link to='/addmovies'><Button style={{float: "left", margin: "10px 0 15px 15px"}} type="primary"><PlusCircleTwoTone/> Add New Movies</Button></Link>
-            <Table columns={columns} dataSource={games} onChange={onChange}/>
+            <Table columns={columns} dataSource={movies} onChange={onChange}/>
         </div>
     );
 }

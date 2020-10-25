@@ -1,7 +1,7 @@
 import React, {useContext} from 'react'
 import axios from 'axios';
-import {GamesContext, UserContext} from '../Context/Context'
 import {Link} from "react-router-dom";
+import {GamesContext, UserContext} from '../Context/Context'
 import {Table, Space, Button} from 'antd';
 import {PlusCircleTwoTone} from '@ant-design/icons';
 import './Style.css'
@@ -18,10 +18,6 @@ const ListGames = () => {
           setGames(newGames)
         })
     }
-
-      const handleEdit = event =>{
-        var action = parseInt(event.target.value)
-      }
 
 const columns = [
     {
@@ -46,9 +42,9 @@ const columns = [
     },
     {
       title: 'Multi Player',
-      dataIndex: 'multiPlayer',
+      dataIndex: 'multiplayer',
       sorter: {
-        compare: (a, b) => a.multiPlayer - b.multiPlayer,
+        compare: (a, b) => a.multiplayer - b.multiplayer,
         multiple: 2,
       },
     },
@@ -69,7 +65,7 @@ const columns = [
         key: 'id',
         render: (a) => (
           <Space size="middle">
-            <button>Edit</button>
+            <button><Link to={`editgames/${a.id}`}>Edit</Link></button>
             <button value={a.id} onClick={handleDelete}>Delete</button>
           </Space>
         )
@@ -83,7 +79,7 @@ const columns = [
     return(
         <div className="container">
             <h1 className="title-container">List Games</h1>
-            <Link to='/addgames'><Button style={{float: "left", margin: "10px 0 15px 15px"}} type="primary"><PlusCircleTwoTone/> Add New Movie</Button></Link>
+            <Link to='/addgames'><Button style={{float: "left", margin: "10px 0 15px 15px"}} type="primary"><PlusCircleTwoTone/> Add New Games</Button></Link>
             <Table columns={columns} dataSource={games} onChange={onChange}/>
         </div>
     );

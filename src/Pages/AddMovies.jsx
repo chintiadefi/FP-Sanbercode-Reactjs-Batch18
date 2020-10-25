@@ -48,7 +48,7 @@ const AddGames = () => {
 
   return (
     <Layout>
-       <Link to='/listgames'><Button style={{margin: "10px 0 15px 25%"}} type="primary"><ArrowLeftOutlined/></Button></Link>
+       <Link to='/listmovies'><Button style={{margin: "10px 0 15px 25%"}} type="primary"><ArrowLeftOutlined/></Button></Link>
         <h1 className="title-container" style={{textAlign: "center"}}>List Movies</h1>
     <Form {...layout} style={{margin: '25px 0 100px 0'}} validateMessages={validateMessages} onFinish={handleSubmit}>
       <Form.Item name={'title'} label="Title" rules={[{ required: true }]}>
@@ -63,7 +63,7 @@ const AddGames = () => {
       <Form.Item name={'rating'} label="Rating" rules={[{ type: 'number', min: 0, max: 10}]}>
         <InputNumber/>
       </Form.Item>
-      <Form.Item name={'year'} label="Released" rules={[{ type: 'number', min: 2000, max: 2020, required: true }]}>
+      <Form.Item name={'year'} label="Year" rules={[{ type: 'number', min: 1900, max: 2020, required: true }]}>
         <InputNumber/>
       </Form.Item>
       <Form.Item name={'description'} label="Description">
