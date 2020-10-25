@@ -12,8 +12,10 @@ import AddGames from './Pages/AddGames'
 import EditGames from './Pages/EditGames'
 import ListMovies from './Pages/ListMovies'
 import AddMovies from './Pages/AddMovies'
+import EditMovies from './Pages/EditMovies'
 import Register from './Pages/Register'
 import Login from './Pages/Login'
+import ChangePassword from './Pages/ChangePassword'
 import 'antd/dist/antd.css'
 
 function Routes() {
@@ -61,6 +63,10 @@ function Routes() {
     <PrivateRoute exact path='/addmovies' user={user}>
     <MoviesProvider><AddMovies/></MoviesProvider>
     </PrivateRoute>
+    <PrivateRoute exact path='/editmovies/:id' user={user}>
+    <MoviesProvider><EditMovies/></MoviesProvider>
+    </PrivateRoute>
+    <PrivateRoute exact path='/changepassword' user={user} component={ChangePassword}/>
     <LoginRoute exact path='/register' user={user} component={Register}/>
     <LoginRoute exact path='/login' user={user} component={Login}/>
   </Switch>

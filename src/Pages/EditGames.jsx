@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react'
+import React, {useContext} from 'react'
 import axios from 'axios'
 import {GamesContext, UserContext} from '../Context/Context'
 import {Link, useParams} from "react-router-dom";
@@ -23,7 +23,7 @@ const validateMessages = {
 };
 
 const EditGames = () => {
-  const [games, setGames] = useContext(GamesContext)
+  const [games] = useContext(GamesContext)
   const [user] = useContext(UserContext)
     
   let { id } = useParams();
@@ -97,7 +97,7 @@ const EditGames = () => {
         <Input.TextArea />
       </Form.Item>
       <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
-        <Button type="primary" htmlType="submit, resetFields">
+        <Button type="primary" htmlType="submit">
           Save Edit
         </Button>
       </Form.Item>

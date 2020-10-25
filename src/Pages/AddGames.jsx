@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react'
+import React, {useContext} from 'react'
 import axios from 'axios'
 import {GamesContext, UserContext} from '../Context/Context'
 import {Link} from "react-router-dom";
@@ -87,7 +87,7 @@ const AddGames = () => {
         <Input.TextArea />
       </Form.Item>
       <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
-        <Button type="primary" htmlType="submit, resetFields">
+        <Button type="primary" htmlType="submit">
           Add New Games
         </Button>
       </Form.Item>

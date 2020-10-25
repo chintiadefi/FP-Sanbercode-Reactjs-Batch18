@@ -1,6 +1,6 @@
-import React, {useContext, useState} from 'react'
+import React, {useContext} from 'react'
 import axios from 'axios'
-import {MoviesContext, UserContext} from '../Context/Context'
+import {UserContext} from '../Context/Context'
 import {Link} from "react-router-dom";
 import {Form, Input, InputNumber, Button, Radio, Layout} from 'antd';
 import {ArrowLeftOutlined} from '@ant-design/icons';
@@ -24,7 +24,6 @@ const validateMessages = {
 
 
 const AddGames = () => {
-  const [movies, setMovies] = useContext(MoviesContext)
   const [user] = useContext(UserContext)
 
   const handleSubmit = values => {
@@ -76,7 +75,7 @@ const AddGames = () => {
         <Input.TextArea />
       </Form.Item>
       <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
-        <Button type="primary" htmlType="submit, resetFields">
+        <Button type="primary" htmlType="submit">
           Add New Games
         </Button>
       </Form.Item>

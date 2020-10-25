@@ -19,20 +19,18 @@ const ListMovies = () => {
         })
     }
 
-      const handleEdit = event =>{
-        var action = parseInt(event.target.value)
-      }
-
 const columns = [
     {
       title: 'Title',
       dataIndex: 'title',
+      ellipsis: true,
       sorter: (a, b) => a.title.length - b.title.length,
       sortDirections: ['descend', 'ascend'],
     },
     {
         title: 'Genre',
         dataIndex: 'genre',
+        ellipsis: true,
         sorter: (a, b) => a.genre.length - b.genre.length,
         sortDirections: ['descend', 'ascend'],
       },
@@ -61,19 +59,21 @@ const columns = [
       },
     },
     {
-        title: 'Description',
-        dataIndex: 'description',
+      title: 'Description',
+      dataIndex: 'description',
+      ellipsis: true
       },
       {
         title: 'Review',
         dataIndex: 'review',
+        ellipsis: true
       },
       {
         title: 'Action',
         key: 'id',
         render: (a) => (
           <Space size="middle">
-            <button>Edit</button>
+            <button><Link to={`editmovies/${a.id}`}>Edit</Link></button>
             <button value={a.id} onClick={handleDelete}>Delete</button>
           </Space>
         )
