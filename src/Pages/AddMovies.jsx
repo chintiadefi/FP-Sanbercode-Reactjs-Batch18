@@ -52,6 +52,9 @@ const AddGames = () => {
       <Form.Item name={'review'} label="Review">
         <Input.TextArea />
       </Form.Item>
+      <Form.Item name={'review'} label="Review">
+        <Input.TextArea />
+      </Form.Item>
       <Form.Item name={'image'} label="Image URL" rules={[{ required: true }]}>
         <Input.TextArea />
       </Form.Item>
