@@ -21,6 +21,7 @@ const DetailGames = () => {
             </div>
             <div className="detail">
             <h2 className="detail-tittle">{item[0].title}</h2>
+            <h2>Test</h2>
             <br/>
             <p>Genre : {item[0].genre}</p>
             <p>Single Player : {(item[0].singlePlayer) === 0 ? <Tag color="red">No</Tag> : <Tag color="blue">Yes</Tag>}</p>

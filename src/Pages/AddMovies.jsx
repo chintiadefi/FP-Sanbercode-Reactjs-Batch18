@@ -26,25 +26,6 @@ const validateMessages = {
 const AddGames = () => {
   const [user] = useContext(UserContext)
 
-  const handleSubmit = values => {
-    axios.post("https://backendexample.sanbersy.com/api/data-movie", {
-      title: values.title, 
-      genre: values.genre, 
-      duration: values.duration,
-      rating: values.rating,
-      year: values.year,
-      description: values.description,
-      review: values.review,
-      image_url: values.image},
-      {headers: {"Authorization" : `Bearer ${user.token}`}})
-      .then(done => {
-        alert("Succesfull")
-      })
-      .catch((err)=>{
-      alert(err)
-    })
-  }
-
   return (
     <Layout>
        <Link to='/listmovies'><Button style={{margin: "10px 0 15px 25%"}} type="primary"><ArrowLeftOutlined/></Button></Link>
@@ -66,6 +47,9 @@ const AddGames = () => {
         <InputNumber/>
       </Form.Item>
       <Form.Item name={'description'} label="Description">
+        <Input.TextArea />
+      </Form.Item>
+      <Form.Item name={'review'} label="Review">
         <Input.TextArea />
       </Form.Item>
       <Form.Item name={'review'} label="Review">

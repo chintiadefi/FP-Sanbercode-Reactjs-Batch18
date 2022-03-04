@@ -86,14 +86,6 @@ const AddGames = () => {
       <Form.Item name={'platform'} label="Platform">
         <Input.TextArea />
       </Form.Item>
-      <Form.Item name={'image'} label="Image URL" rules={[{ required: true }]}>
-        <Input.TextArea />
-      </Form.Item>
-      <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
-        <Button type="primary" htmlType="submit">
-          Add New Games
-        </Button>
-      </Form.Item>
     </Form>
     </Layout>
   );
