@@ -62,8 +62,11 @@ const AddGames = () => {
       <Form.Item name={'title'} label="Title" rules={[{ required: true }]}>
         <Input/>
       </Form.Item>
-      <Form.Item name={'genre'} label="Genre" rules={[{ required: true }]}>
-        <Input/>
+      <Form.Item name="singlePlayer" label="Single Player" rules={[{ required: true }]}>
+        <Radio.Group>
+          <Radio value="1">Yes</Radio>
+          <Radio value="0">No</Radio>
+        </Radio.Group>
       </Form.Item>
       <Form.Item name="singlePlayer" label="Single Player" rules={[{ required: true }]}>
         <Radio.Group>
